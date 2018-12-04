@@ -61,4 +61,8 @@ public class Person {
     public int getFloorNumber(){
         return fromFloor.getIdFloor();
     }
+
+    public void draw(Graphics g, JPanel observer){
+        g.drawImage(image,x ,y, observer);
+    }
 }

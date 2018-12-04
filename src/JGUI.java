@@ -13,7 +13,7 @@ public class JGUI extends JFrame {
         this.setResizable(false);
         this.pack();
 
-        this.setTitle("Boy");
+        this.setTitle("Elevator");
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }

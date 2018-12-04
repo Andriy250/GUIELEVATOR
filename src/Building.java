@@ -1,3 +1,5 @@
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -7,7 +9,7 @@ public class Building {
     private ArrayList<Person> crowd; // i ga
 
     public static int B_WIDTH = 1350;
-    public static int B_HEIGHT = 1350;
+    public static int B_HEIGHT = 1080;
 
     public Building(){
         numberOfFloors = 5;
@@ -33,5 +35,11 @@ public class Building {
         try {
             return crowd.size();
         } catch (Exception ex) {return 0;}
+    }
+
+    public void draw(Graphics g, JPanel observer){
+        for(Person person : crowd){
+            person.draw(g,observer);
+        }
     }
 }

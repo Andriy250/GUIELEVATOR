@@ -7,7 +7,7 @@ import java.util.Timer;*/
 
 public class Board extends JPanel implements ActionListener {
     private final int B_WIDTH = 1350;
-    private final int B_HEIGHT = 1080;
+    private final int B_HEIGHT = 980;
     private final int INITIAL_X = -40;
     private final int INITIAL_Y = -40;
     private final int DELAY = 500;
@@ -48,14 +48,7 @@ public class Board extends JPanel implements ActionListener {
     public void paintComponent(Graphics g){
         super.paintComponent(g);
 
-        drawBoy(g);
-    }
-
-    private void drawBoy(Graphics g){
-        for (int i = 0; i < building.getSizeOfCrowd(); ++i){
-            g.drawImage(building.getPerson(i).getImage(),building.getPerson(i).getX(),building.getPerson(i).getY(),this);
-        }
-        Toolkit.getDefaultToolkit().sync();
+        building.draw(g,this);
     }
 
     @Override
