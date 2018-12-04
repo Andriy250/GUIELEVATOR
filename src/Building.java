@@ -22,15 +22,19 @@ public class Building {
 
     public void addPerson(){
 
-        int fromFloor = ThreadLocalRandom.current().nextInt(1, 5);
+        int fromFloor = ThreadLocalRandom.current().nextInt(0, 4);
         int toFloor =0;
         do{
-            toFloor = ThreadLocalRandom.current().nextInt(1, 5);
+            toFloor = ThreadLocalRandom.current().nextInt(0, 4);
         } while (fromFloor == toFloor);
+        System.out.println(fromFloor);
         crowd.add(new Person(floors[fromFloor],floors[toFloor]));
     }
 
-    public Person getPerson(int i){return crowd.get(i);}
+    public Person getPerson(int i) {
+        int k = 0;
+        return crowd.get(i);
+    }
     public int getSizeOfCrowd(){
         try {
             return crowd.size();

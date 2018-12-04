@@ -35,7 +35,7 @@ public class Person {
     }
 
     public void move(){
-        x++;
+        x += 4;
         //y++;
     }
 
@@ -53,9 +53,6 @@ public class Person {
 
     public Image getImage() {
         return image;
-    }
-    public void changeX(){
-        x = 100;
     }
 
     public int getFloorNumber(){

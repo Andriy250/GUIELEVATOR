@@ -16,7 +16,7 @@ public class MyThread extends Thread implements  ActionListener{
     public MyThread(String name, Board _board, Person _person){
         super(name);
         board = _board;
-        timer = new Timer(DELAY, board);
+        //timer = new Timer(DELAY, board);
         person = _person;
     }
 

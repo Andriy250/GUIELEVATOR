@@ -2,10 +2,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-/*import java.util.TimerTask;
-import java.util.Timer;*/
+import  java.util.Timer;
+import java.util.TimerTask;
 
-public class Board extends JPanel implements ActionListener {
+public class Board extends JPanel{
     private final int B_WIDTH = 1350;
     private final int B_HEIGHT = 980;
     private final int INITIAL_X = -40;
@@ -13,8 +13,10 @@ public class Board extends JPanel implements ActionListener {
     private final int DELAY = 500;
 
     private Image boy; // hz moje star
-    private Timer timer;
+    private Timer timerMove, timerAddPerson;
     private int x,y;
+
+    private int counter;
 
     private Building building;
 
@@ -22,8 +24,6 @@ public class Board extends JPanel implements ActionListener {
         initBoard();
         building = new Building();
         building.addPerson();
-        building.addPerson();
-        System.out.println(building.getPerson(0).getY()+ " " + building.getPerson(-0).getFloorNumber()+ "     " + building.getPerson(1).getY()+ " " + building.getPerson(1).getFloorNumber());
         //Floor fl = new Floor();
         System.out.println(Building.B_WIDTH / 6);
     }
@@ -33,15 +33,11 @@ public class Board extends JPanel implements ActionListener {
         this.setPreferredSize(new Dimension(B_WIDTH,B_HEIGHT));
 
 
-        timer = new Timer(DELAY, this);
+        timerMove = new Timer();
+        timerMove.schedule(new MoveTask(this), 0, 500);
+        timerAddPerson  = new Timer();
+        timerAddPerson.schedule(new AddPeopleTask(this),1000, 5000);
 
-        timer.start();
-
-    }
-
-    private void loadImage(){
-        ImageIcon ii = new ImageIcon("src/boy.png");
-        boy = ii.getImage();
     }
 
     @Override
@@ -51,13 +47,41 @@ public class Board extends JPanel implements ActionListener {
         building.draw(g,this);
     }
 
-    @Override
+
+    class MoveTask extends TimerTask{
+
+        private Board board;
+
+        public MoveTask(Board _board){super(); board = _board; }
+
+        @Override
+        public void run() {
+            for(int i = 0; i < building.getSizeOfCrowd(); ++i){
+                building.getPerson(i).move();
+            }
+            board.repaint();
+        }
+    }
+
+    class AddPeopleTask extends TimerTask{
+        private Board board;
+
+        public AddPeopleTask (Board _board) {super(); board = _board;}
+
+        @Override
+        public void run() {
+            building.addPerson();
+            board.repaint();
+        }
+    }
+
+    /*@Override
     public void actionPerformed(ActionEvent e) {
-        //building.addPerson();
+        building.addPerson();
        for(int i = 0; i < building.getSizeOfCrowd(); ++i){
            building.getPerson(i).move();
        }
-
+        //building.addPerson();
         this.repaint();
-    }
+    }*/
 }
